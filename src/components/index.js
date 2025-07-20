@@ -1,0 +1,5 @@
+export { Button } from './Button/Button.jsx'
+export { FooterLinks } from './FooterLinks/FooterLinks.jsx'
+export { Socials } from './FooterSocials/Socials.jsx'
+export { Logo } from './Logo/Logo.jsx'
+export { NavBar } from './NavBar/NavBar.jsx'
