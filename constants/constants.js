@@ -6,3 +6,5 @@ export const OPTIONS = {
 	'Content-Type': 'application/json',
 	Authorization: `Bearer ${API_KEY}`,
 }
+
+export const FIAT_ARRAY = ['RUB', 'EUR', 'USD']
