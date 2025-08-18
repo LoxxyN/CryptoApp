@@ -10,6 +10,10 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, './src/'),
+			'@constants': path.resolve(__dirname, './constants/'),
+			'@hooks': path.resolve(__dirname, './hooks/'),
+			'@utils': path.resolve(__dirname, './utils/'),
+			'@config': path.resolve(__dirname, './config/'),
 		},
 	},
 })

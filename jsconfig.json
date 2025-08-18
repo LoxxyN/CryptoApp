@@ -2,7 +2,13 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["src/*"]
+			"@/*": ["src/*"],
+			"@constants/*": ["constants/*"],
+			"@hooks/*": ["hooks/*"],
+			"@utils/*": ["utils/*"],
+			"@config/*": ["config/*"]
 		}
-	}
+	},
+	"include": ["src", "hooks", "utils", "constants", "config"],
+	"exclude": ["node_modules"]
 }

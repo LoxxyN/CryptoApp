@@ -1,11 +1,11 @@
-import { Converter, Footer, Header } from './layouts'
+import { ConverterContainer, FooterContainer, HeaderContainer } from './layouts'
 
 export const App = () => {
 	return (
 		<div>
-			<Header />
-			<Converter />
-			<Footer />
+			<HeaderContainer />
+			<ConverterContainer />
+			<FooterContainer />
 		</div>
 	)
 }

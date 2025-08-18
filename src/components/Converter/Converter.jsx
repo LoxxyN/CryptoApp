@@ -1,12 +1,12 @@
-import { OPTIONS, URL } from '@/constants/constants.js'
-import { useFetch } from '@/hooks/useFetch.js'
-import { convertCurrencies } from '@/utils/convertCurrencies'
-import { RATES } from '@/utils/getRates.js'
+import { OPTIONS, URL } from '@constants/constants'
+import { useFetch } from '@hooks/useFetch'
+import { convertCurrencies } from '@utils/convertCurrencies'
+import { RATES } from '@utils/getRates'
 import { useMemo, useState } from 'react'
 import { SwapConvertButton } from '../Button/SwapConvertButton'
-import { ConvertInput } from './ConvertInput.jsx'
+import { ConvertInput } from './ConverterInput.jsx'
 
-export const Convert = () => {
+export const Converter = () => {
 	const [fromAmount, setFromAmount] = useState(1)
 	const [fromCurrency, setFromCurrency] = useState('USD')
 	const [toCurrency, setToCurrency] = useState('RUB')

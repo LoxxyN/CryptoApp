@@ -1,6 +1,6 @@
 import { FaDiscord, FaGithub, FaLinkedin, FaTelegram } from 'react-icons/fa'
 
-export const Socials = () => {
+export const FooterSocials = () => {
 	return (
 		<ul className='flex gap-x-4 justify-evenly items-center'>
 			<li>

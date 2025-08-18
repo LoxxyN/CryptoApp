@@ -3,9 +3,9 @@ import {
 	SelectContent,
 	SelectTrigger,
 	SelectValue,
-} from '@/components/ui/select'
-import { ConvertItem } from './ConvertItem'
-import { CONVERT_ITEMS } from './ConvertItems.data'
+} from '@/components/Select/Select'
+import { CONVERT_ITEMS } from './ConverterItems.data'
+import { ConverterSelectItem } from './ConverterSelectItem'
 
 export const ConvertInput = ({
 	dir,
@@ -34,7 +34,7 @@ export const ConvertInput = ({
 					</SelectTrigger>
 					<SelectContent>
 						{CONVERT_ITEMS.map(item => (
-							<ConvertItem
+							<ConverterSelectItem
 								key={item.id}
 								value={item.value}
 								icon={item.icon}

@@ -1,7 +1,7 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@utils/twMerge.js'
 
 function Select({ ...props }) {
 	return <SelectPrimitive.Root data-slot='select' {...props} />
