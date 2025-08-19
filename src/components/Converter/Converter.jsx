@@ -45,6 +45,7 @@ export const Converter = () => {
 				amount={amount}
 				currency={toCurrency}
 				onCurrencyChange={setToCurrency}
+				readOnly={true}
 			/>
 		</div>
 	)

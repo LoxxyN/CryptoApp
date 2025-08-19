@@ -13,6 +13,7 @@ export const ConvertInput = ({
 	onAmountChange,
 	currency,
 	onCurrencyChange,
+	readOnly,
 }) => {
 	return (
 		<div className='input-container flex bg-neutral-900 h-16 rounded-2xl w-72 justify-between z-[100]'>
@@ -26,6 +27,7 @@ export const ConvertInput = ({
 				type='text'
 				inputMode='numeric'
 				pattern='[0-9]*'
+				readOnly={readOnly}
 			/>
 			<div className='flex justify-center items-center w-28'>
 				<Select value={currency} onValueChange={onCurrencyChange}>
