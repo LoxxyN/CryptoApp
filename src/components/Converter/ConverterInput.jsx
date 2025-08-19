@@ -19,8 +19,16 @@ export const ConvertInput = ({
 		<div className='input-container flex bg-neutral-900 h-16 rounded-2xl w-72 justify-between z-[100]'>
 			<input
 				className='pl-2.5 w-40'
-				value={amount}
-				onChange={e => onAmountChange(e.target.value)}
+				value={amount === '' ? 0 : amount}
+				onChange={e => {
+					let value = e.target.value
+					if (value === '') {
+						onAmountChange('')
+						return
+					}
+					value = value.replace(/^0+(\d)/, '$1')
+					onAmountChange(value)
+				}}
 				placeholder={dir}
 				name={`convert${dir}`}
 				id={`convert${dir}`}
