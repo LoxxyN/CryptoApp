@@ -2,7 +2,7 @@ import { Converter } from '@/components'
 import { Info, Share2, SlidersHorizontal } from 'lucide-react'
 export const ConverterContainer = () => {
 	return (
-		<div className='bg-neutral-800 h-[30rem] w-80 my-12 rounded-2xl'>
+		<div className='bg-neutral-800 h-[30rem] w-80 rounded-2xl'>
 			<div className='flex items-center justify-between bg-zinc-800 h-1/6 rounded-t-2xl p-4'>
 				<p>Swap to:</p>
 				<div className='flex gap-2'>
