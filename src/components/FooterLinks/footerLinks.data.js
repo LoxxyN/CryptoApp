@@ -1,31 +1,21 @@
 export const FOOTER_LINKS = [
 	{
 		id: 1,
-		name: 'Affilate',
-		link: '/affilate',
-	},
-	{
-		id: 2,
 		name: 'Regulations',
 		link: '/regulations',
 	},
 	{
-		id: 3,
+		id: 2,
 		name: 'Terms',
 		link: '/terms',
 	},
 	{
-		id: 4,
+		id: 3,
 		name: 'FAQ',
 		link: '/faq',
 	},
 	{
-		id: 5,
-		name: 'Docs',
-		link: '/docs',
-	},
-	{
-		id: 6,
+		id: 4,
 		name: 'Contacts',
 		link: '/contacts',
 	},

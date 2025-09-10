@@ -1,18 +1,18 @@
 export const NAVBAR_LINKS = [
 	{
 		id: 1,
-		name: 'Swap',
-		link: '/swap',
+		name: 'Converter',
+		link: '/converter',
 	},
 	{
 		id: 2,
-		name: 'Liqiudity',
-		link: '/liqiudity',
+		name: 'Top 100',
+		link: '/top100',
 	},
 	{
 		id: 3,
-		name: 'Discover',
-		link: '/discover',
+		name: 'Dashboard',
+		link: '/dashboard',
 	},
 	{
 		id: 4,

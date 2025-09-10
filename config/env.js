@@ -1,7 +1,7 @@
 const ENV = {
-	COINGECKO_API_KEY: import.meta.env.VITE_COINGECKO_API_KEY,
-	BASE_URL: import.meta.env.VITE_BASE_URL,
+	COINGECKO_API_KEY: import.meta.env.VITE_BASE_CRYPTO_URL,
+	BASE_CRYPTO_URL: import.meta.env.VITE_BASE_URL,
 }
 
-export const BASE_URL = ENV.BASE_URL
 export const API_KEY = ENV.COINGECKO_API_KEY
+export const CRYPTO_URL = ENV.BASE_CRYPTO_URL

@@ -1,7 +1,7 @@
 import { CurrencyIcon } from '../CurrencyIcon/CurrencyIcon'
-import { SelectItem } from '../Select/Select'
+import { SelectItem } from '../ShadSelect/ShadSelect'
 
-export const ConverterSelectItem = ({ value, icon, name }) => {
+export const CurrencySelectItem = ({ value, icon, name }) => {
 	return (
 		<SelectItem value={value}>
 			<CurrencyIcon icon={icon} />
