@@ -1,58 +1,33 @@
-import {
-	Select,
-	SelectContent,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/Select/Select'
+import { CurrencySelect } from '../CurrencySelect/CurrencySelect'
+import { NumberInput } from '../NumberInput/NumberInput'
 import { CONVERT_ITEMS } from './ConverterItems.data'
-import { ConverterSelectItem } from './ConverterSelectItem'
 
-export const ConvertInput = ({
-	dir,
+export const ConverterInput = ({
 	amount,
 	onAmountChange,
 	currency,
 	onCurrencyChange,
+	dir,
 	readOnly,
 }) => {
 	return (
 		<div className='input-container flex bg-neutral-900 h-16 rounded-2xl w-72 justify-between z-[100]'>
-			<input
-				className='pl-2.5 w-40'
+			<NumberInput
 				value={amount === '' ? 0 : amount}
-				onChange={e => {
-					let value = e.target.value
-					if (value === '') {
-						onAmountChange('')
-						return
-					}
-					value = value.replace(/^0+(\d)/, '$1')
-					onAmountChange(value)
-				}}
+				onChange={onAmountChange}
+				id={`convert${dir}`}
 				placeholder={dir}
 				name={`convert${dir}`}
-				id={`convert${dir}`}
-				type='text'
-				inputMode='numeric'
-				pattern='[0-9]*'
 				readOnly={readOnly}
 			/>
+
 			<div className='flex justify-center items-center w-28'>
-				<Select value={currency} onValueChange={onCurrencyChange}>
-					<SelectTrigger className='w-24'>
-						<SelectValue placeholder={dir} />
-					</SelectTrigger>
-					<SelectContent>
-						{CONVERT_ITEMS.map(item => (
-							<ConverterSelectItem
-								key={item.id}
-								value={item.value}
-								icon={item.icon}
-								name={item.name}
-							/>
-						))}
-					</SelectContent>
-				</Select>
+				<CurrencySelect
+					value={currency}
+					onValueChange={onCurrencyChange}
+					items={CONVERT_ITEMS}
+					placeholder={dir}
+				/>
 			</div>
 		</div>
 	)

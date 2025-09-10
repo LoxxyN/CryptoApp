@@ -1,18 +1,17 @@
-import { OPTIONS, URL } from '@constants/constants'
-import { FIAT_ARRAY } from '@constants/constants.js'
+import { CONVERTER_URL, FIAT_ARRAY, OPTIONS } from '@constants/constants'
 import { useFetch } from '@hooks/useFetch'
 import { convertCurrencies } from '@utils/convertCurrencies'
 import { RATES } from '@utils/getRates'
-import { isFiatCurrency } from '@utils/isFiatCurrency.js'
+import { isFiatCurrency } from '@utils/isFiatCurrency'
 import { useMemo, useState } from 'react'
 import { SwapConvertButton } from '../Button/SwapConvertButton'
-import { ConvertInput } from './ConverterInput.jsx'
+import { ConverterInput } from './ConverterInput'
 
-export const Converter = () => {
+const Converter = () => {
 	const [fromAmount, setFromAmount] = useState(1)
 	const [fromCurrency, setFromCurrency] = useState('USD')
 	const [toCurrency, setToCurrency] = useState('RUB')
-	const { data } = useFetch(URL, OPTIONS)
+	const { data } = useFetch(CONVERTER_URL, OPTIONS)
 	const rates = useMemo(() => (data ? RATES(data) : null), [data])
 
 	const toAmount = useMemo(() => {
@@ -26,9 +25,14 @@ export const Converter = () => {
 
 	const amount = isFiatCurrency(FIAT_ARRAY, toCurrency, toAmount)
 
+	const onSwapValue = () => {
+		setFromCurrency(toCurrency)
+		setToCurrency(fromCurrency)
+	}
+
 	return (
 		<div className='p-4'>
-			<ConvertInput
+			<ConverterInput
 				dir='From'
 				amount={fromAmount}
 				onAmountChange={setFromAmount}
@@ -37,10 +41,10 @@ export const Converter = () => {
 			/>
 
 			<div className='flex justify-center items-center'>
-				<SwapConvertButton />
+				<SwapConvertButton onClick={onSwapValue} />
 			</div>
 
-			<ConvertInput
+			<ConverterInput
 				dir='To'
 				amount={amount}
 				currency={toCurrency}
@@ -50,3 +54,5 @@ export const Converter = () => {
 		</div>
 	)
 }
+
+export default Converter

@@ -11,9 +11,10 @@ export default defineConfig({
 		alias: {
 			'@': path.resolve(__dirname, './src/'),
 			'@constants': path.resolve(__dirname, './constants/'),
+			'@config': path.resolve(__dirname, './config/'),
 			'@hooks': path.resolve(__dirname, './hooks/'),
 			'@utils': path.resolve(__dirname, './utils/'),
-			'@config': path.resolve(__dirname, './config/'),
+			'@pages': path.resolve(__dirname, './pages/'),
 		},
 	},
 })
