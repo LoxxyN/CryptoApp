@@ -1,6 +1,7 @@
 import {
 	Select,
 	SelectContent,
+	SelectSeparator,
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ShadSelect/ShadSelect'
@@ -9,7 +10,8 @@ import { CurrencySelectItem } from './CurrencySelectItem'
 export const CurrencySelect = ({
 	value,
 	onValueChange,
-	items,
+	itemsFiat,
+	itemsCrypto,
 	placeholder,
 }) => {
 	return (
@@ -18,7 +20,16 @@ export const CurrencySelect = ({
 				<SelectValue placeholder={placeholder} />
 			</SelectTrigger>
 			<SelectContent>
-				{items.map(item => (
+				{itemsFiat.map(item => (
+					<CurrencySelectItem
+						key={item.id}
+						value={item.value}
+						icon={item.icon}
+						name={item.name}
+					/>
+				))}
+				<SelectSeparator />
+				{itemsCrypto.map(item => (
 					<CurrencySelectItem
 						key={item.id}
 						value={item.value}

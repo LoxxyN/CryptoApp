@@ -17,18 +17,10 @@ export const App = () => {
 			<Suspense fallback={<Loader />}>
 				<Routes>
 					<Route path='/' element={<LayoutContainer />}>
-						<Suspense fallback={<Loader />}>
-							<Route index element={<MainPage />} />
-						</Suspense>
-						<Suspense fallback={<Loader />}>
-							<Route path='converter' element={<ConverterPage />} />
-						</Suspense>
-						<Suspense fallback={<Loader />}>
-							<Route path='top100' element={<Top100Page />} />
-						</Suspense>
-						<Suspense fallback={<Loader />}>
-							<Route path='about' element={<AboutPage />} />
-						</Suspense>
+						<Route index element={<MainPage />} />
+						<Route path='converter' element={<ConverterPage />} />
+						<Route path='top100' element={<Top100Page />} />
+						<Route path='about' element={<AboutPage />} />
 						<Route path='*' element={<NotFoundPage />} />
 					</Route>
 				</Routes>

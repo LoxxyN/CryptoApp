@@ -1,12 +1,13 @@
+import { NumberInput } from '@/components/index.js'
 import { CurrencySelect } from '../CurrencySelect/CurrencySelect'
-import { NumberInput } from '../NumberInput/NumberInput'
-import { CONVERT_ITEMS } from './ConverterItems.data'
 
 export const ConverterInput = ({
 	amount,
 	onAmountChange,
 	currency,
 	onCurrencyChange,
+	itemsCrypto,
+	itemsFiat,
 	dir,
 	readOnly,
 }) => {
@@ -25,7 +26,8 @@ export const ConverterInput = ({
 				<CurrencySelect
 					value={currency}
 					onValueChange={onCurrencyChange}
-					items={CONVERT_ITEMS}
+					itemsFiat={itemsFiat}
+					itemsCrypto={itemsCrypto}
 					placeholder={dir}
 				/>
 			</div>

@@ -1,18 +1,23 @@
-import { API_KEY, CRYPTO_URL } from '@config/env'
-
-export const URL = CRYPTO_URL
-export const OPTIONS = {
-	method: 'GET',
-	'Content-Type': 'application/json',
-	Authorization: `Bearer ${API_KEY}`,
+import { ENV } from '@config/env'
+export const OPTIONS = API_KEY => {
+	return {
+		method: 'GET',
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${API_KEY}`,
+	}
 }
+
+export const CRYPTO_API_KEY = ENV.COINGECKO_API_KEY
+export const FIAT_API_KEY = ENV.FXRATES_API_KEY
 
 export const FIAT_ARRAY = ['RUB', 'EUR', 'USD']
 
-const query_params = {
-	converter: 'simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd',
+const QUERY_PARAMS = {
+	converter: 'simple/price?vs_currencies=usd&ids=btc%2Csol%2Ceth',
 	top100: 'coins/markets?vs_currency=usd&per_page=100',
+	fiat: 'latest?base=USD&currencies=RUB,EUR&places=3',
 }
 
-export const TOP100_URL = URL + query_params.top100
-export const CONVERTER_URL = URL + query_params.converter
+export const TOP100_URL = ENV.BASE_CRYPTO_URL + QUERY_PARAMS.top100
+export const CONVERTER_URL = ENV.BASE_CRYPTO_URL + QUERY_PARAMS.converter
+export const FIAT_URL = ENV.BASE_FIAT_URL + QUERY_PARAMS.fiat
