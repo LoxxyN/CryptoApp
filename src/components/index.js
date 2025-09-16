@@ -1,4 +1,5 @@
 export { Button } from './Button/Button.jsx'
+export { SwapConvertButton } from './Button/SwapConvertButton.jsx'
 export { CurrencyIcon } from './CurrencyIcon/CurrencyIcon.jsx'
 export { FooterLinks } from './FooterLinks/FooterLinks.jsx'
 export { FooterSocials } from './FooterSocials/FooterSocials.jsx'
