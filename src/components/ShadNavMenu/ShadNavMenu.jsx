@@ -2,7 +2,7 @@ import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu'
 import { cva } from 'class-variance-authority'
 import { ChevronDownIcon } from 'lucide-react'
 
-import { cn } from '@utils/twMerge'
+import { cn } from '@utils/index'
 
 function NavigationMenu({ className, children, viewport = true, ...props }) {
 	return (
