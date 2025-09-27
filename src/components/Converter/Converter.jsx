@@ -6,9 +6,7 @@ import {
 	OPTIONS,
 } from '@constants/constants'
 import { useFetch } from '@hooks/useFetch'
-import { getCryptoData } from '@utils/getCryptoData.js'
-import { getToAmount } from '@utils/getToAmount'
-import { isFiatCurrency } from '@utils/isFiatCurrency'
+import { getCryptoData, getToAmount, isFiatCurrency } from '@utils/index'
 import { useMemo, useState } from 'react'
 import { CRYPTO_CURRENCY } from './CryptoCurrency.data'
 import { FIAT_CURRENCY } from './FiatCurrency.data'

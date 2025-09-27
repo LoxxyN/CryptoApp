@@ -1,4 +1,4 @@
-import { convertCurrencies } from '@utils/convertCurrencies'
+import { convertCurrencies } from '@utils/index'
 
 export const getToAmount = ({
 	rates,
