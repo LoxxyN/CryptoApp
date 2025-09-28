@@ -42,10 +42,16 @@ class cryptoApiService {
 				},
 			})
 
-			return {
-				RUB: response.data.rates.RUB,
-				EUR: response.data.rates.EUR,
-			}
+			return [
+				{
+					currency: "RUB",
+					usd_price: response.data.rates.RUB,
+				},
+				{
+					currency: "EUR",
+					usd_price: response.data.rates.EUR,
+				},
+			]
 		} catch (error) {
 			console.error("Ошибка при запросе фиатных валют:", error.message)
 			throw new Error("Не удалось получить список фиатных валют")
@@ -78,26 +84,28 @@ class cryptoApiService {
 			const response = await this.coinGeckoClient.get("coins/markets", {
 				params: {
 					vs_currency: "usd",
+					page: 1,
 					per_page: 100,
-					price_change_percentage: "1h,24h,7d",
+					precision: 8,
+					price_change_percentage: "1h,24h,7d,14d",
 				},
 			})
 
 			return response.data.map(coin => ({
 				id: coin.id,
 				symbol: coin.symbol,
-				name: coin.name,
 				image: coin.image,
+				market_cap_rank: coin.market_cap_rank,
 				current_price: coin.current_price,
 				market_cap: coin.market_cap,
-				market_cap_rank: coin.market_cap_rank,
-				low_24h: coin.low_24h,
-				high_24h: coin.high_24h,
-				price_change_24h: coin.price_change_24h,
-				price_change_percentage_24h: coin.price_change_percentage_24h,
 				market_cap_change_24h: coin.market_cap_change_24h,
-				market_cap_change_percentage_24h: coin.market_cap_change_percentage_24h,
-				last_updated: coin.last_updated,
+				price_change_percentage_24h: coin.price_change_percentage_24h,
+				price_change_percentage_1h_in_currency:
+					coin.price_change_percentage_1h_in_currency,
+				price_change_percentage_24h_in_currency:
+					coin.price_change_percentage_24h_in_currency,
+				price_change_percentage_7d_in_currency:
+					coin.price_change_percentage_7d_in_currency,
 			}))
 		} catch (error) {
 			console.error("Ошибка при запросе топ-100 криптовалют:", error.message)
