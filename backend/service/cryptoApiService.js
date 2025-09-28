@@ -1,14 +1,14 @@
-import axios from 'axios'
-import dotenv from 'dotenv'
+import axios from "axios"
+import dotenv from "dotenv"
 dotenv.config()
 
-class cryptoApiServiceClass {
+class cryptoApiService {
 	constructor() {
 		this.coinGeckoBaseURL =
-			process.env.BASE_CRYPTO_URL || 'https://api.coingecko.com/api/v3/'
+			process.env.BASE_CRYPTO_URL || "https://api.coingecko.com/api/v3/"
 
 		this.fxratesBaseURL =
-			process.env.BASE_FIAT_URL || 'https://api.fxratesapi.com/'
+			process.env.BASE_FIAT_URL || "https://api.fxratesapi.com/"
 
 		this.cryptoApiKey = process.env.COINGECKO_API_KEY
 		this.fiatApiKey = process.env.FXRATES_API_KEY
@@ -17,8 +17,8 @@ class cryptoApiServiceClass {
 			baseURL: this.coinGeckoBaseURL,
 			timeout: 10000,
 			headers: {
-				Authorization: this.cryptoApiKey ? `Bearer ${this.cryptoApiKey}` : '',
-				'Content-Type': 'application/json',
+				Authorization: this.cryptoApiKey ? `Bearer ${this.cryptoApiKey}` : "",
+				"Content-Type": "application/json",
 			},
 		})
 
@@ -26,39 +26,60 @@ class cryptoApiServiceClass {
 			baseURL: this.fxratesBaseURL,
 			timeout: 10000,
 			headers: {
-				Authorization: this.fiatApiKey ? `Bearer ${this.fiatApiKey}` : '',
-				'Content-Type': 'application/json',
+				Authorization: this.fiatApiKey ? `Bearer ${this.fiatApiKey}` : "",
+				"Content-Type": "application/json",
 			},
 		})
 	}
 
 	async getFiatCurrencies() {
 		try {
-			const response = await this.fxratesClient.get('latest', {
+			const response = await this.fxratesClient.get("latest?", {
 				params: {
-					base: 'usd',
-					currencies: 'rub,eur',
+					base: "usd",
+					currencies: "rub,eur",
 					places: 3,
 				},
 			})
 
-			return response.data.map(coin => ({
-				base: coin.base,
-				rates: { ...coin.rates },
-			}))
+			return {
+				RUB: response.data.rates.RUB,
+				EUR: response.data.rates.EUR,
+			}
 		} catch (error) {
-			console.error('❌ Ошибка при запросе фиатных валют:', error.message)
-			throw new Error('Не удалось получить список фиатных валют')
+			console.error("Ошибка при запросе фиатных валют:", error.message)
+			throw new Error("Не удалось получить список фиатных валют")
+		}
+	}
+
+	async getCryptoCurrencies() {
+		try {
+			const response = await this.coinGeckoClient.get("simple/price", {
+				params: {
+					vs_currencies: "usd",
+					ids: "bitcoin,ethereum,solana",
+					precision: 8,
+				},
+			})
+
+			return {
+				BTC: response.data.bitcoin.usd,
+				SOL: response.data.solana.usd,
+				ETH: response.data.ethereum.usd,
+			}
+		} catch (error) {
+			console.error("Ошибка при запросе криптовалют:", error.message)
+			throw new Error("Не удалось получить данные криптовалют")
 		}
 	}
 
 	async getTop100Currencies() {
 		try {
-			const response = await this.coinGeckoClient.get('coins/markets', {
+			const response = await this.coinGeckoClient.get("coins/markets", {
 				params: {
-					vs_currency: 'usd',
+					vs_currency: "usd",
 					per_page: 100,
-					price_change_percentage: '1h,24h,7d',
+					price_change_percentage: "1h,24h,7d",
 				},
 			})
 
@@ -79,31 +100,10 @@ class cryptoApiServiceClass {
 				last_updated: coin.last_updated,
 			}))
 		} catch (error) {
-			console.error('❌ Ошибка при запросе топ-100 криптовалют:', error.message)
-			throw new Error('Не удалось получить данные 100 криптовалют')
-		}
-	}
-
-	async getCryptoCurrencies() {
-		try {
-			const response = await this.coinGeckoClient.get('simple/price', {
-				params: {
-					vs_currencies: 'usd',
-					symbols: 'eth,btc,sol',
-					precision: 8,
-				},
-			})
-
-			return response.data.map(coin => ({
-				btc_usd: coin['btc']['usd'],
-				eth_usd: coin['eth']['usd'],
-				sol_usd: coin['sol']['usd'],
-			}))
-		} catch (error) {
-			console.error('❌ Ошибка при запросе криптовалют:', error.message)
-			throw new Error('Не удалось получить данные криптовалют')
+			console.error("Ошибка при запросе топ-100 криптовалют:", error.message)
+			throw new Error("Не удалось получить данные 100 криптовалют")
 		}
 	}
 }
 
-export const cryptoApiService = new cryptoApiServiceClass()
+export default cryptoApiService = new cryptoApiService()
