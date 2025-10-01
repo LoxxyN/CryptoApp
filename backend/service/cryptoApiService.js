@@ -41,16 +41,11 @@ class cryptoApiService {
 					places: 3,
 				},
 			})
-			return [
-				{
-					currency: 'RUB',
-					usd_price: response.data.rates.RUB,
-				},
-				{
-					currency: 'EUR',
-					usd_price: response.data.rates.EUR,
-				},
-			]
+			return {
+				RUB: response.data.rates.RUB,
+				USD: 1.0,
+				EUR: response.data.rates.EUR,
+			}
 		} catch (error) {
 			console.error('Ошибка при запросе фиатных валют:', error.message)
 			throw new Error('Не удалось получить список фиатных валют')
@@ -91,7 +86,7 @@ class cryptoApiService {
 			})
 
 			return response.data.map(coin => ({
-				id: coin.id,
+				name: coin.name,
 				symbol: coin.symbol,
 				image: coin.image,
 				market_cap_rank: coin.market_cap_rank,

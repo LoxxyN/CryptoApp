@@ -6,5 +6,6 @@ rates - объект с курсами валют
 */
 
 export const convertCurrencies = (amount, fromCurrency, toCurrency, rates) => {
+	if (!rates?.[fromCurrency] || !rates?.[toCurrency]) return ''
 	return amount * (rates[fromCurrency] / rates[toCurrency])
 }
