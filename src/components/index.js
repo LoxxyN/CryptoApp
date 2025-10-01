@@ -13,3 +13,12 @@ export {
 	NavigationMenuLink,
 } from './ShadNavMenu/ShadNavMenu.jsx'
 export { Select } from './ShadSelect/ShadSelect.jsx'
+export {
+	Table,
+	TableBody,
+	TableCell,
+	TableFooter,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from './ShadTable/ShadTable.jsx'

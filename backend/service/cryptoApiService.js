@@ -2,7 +2,7 @@ import axios from 'axios'
 import dotenv from 'dotenv'
 dotenv.config()
 
-class cryptoApiServiceClass {
+class cryptoApiService {
 	constructor() {
 		this.coinGeckoBaseURL =
 			process.env.BASE_CRYPTO_URL || 'https://api.coingecko.com/api/v3/'
@@ -34,53 +34,26 @@ class cryptoApiServiceClass {
 
 	async getFiatCurrencies() {
 		try {
-			const response = await this.fxratesClient.get('latest', {
+			const response = await this.fxratesClient.get('latest?', {
 				params: {
 					base: 'usd',
 					currencies: 'rub,eur',
 					places: 3,
 				},
 			})
-
-			return response.data.map(coin => ({
-				base: coin.base,
-				rates: { ...coin.rates },
-			}))
-		} catch (error) {
-			console.error('❌ Ошибка при запросе фиатных валют:', error.message)
-			throw new Error('Не удалось получить список фиатных валют')
-		}
-	}
-
-	async getTop100Currencies() {
-		try {
-			const response = await this.coinGeckoClient.get('coins/markets', {
-				params: {
-					vs_currency: 'usd',
-					per_page: 100,
-					price_change_percentage: '1h,24h,7d',
+			return [
+				{
+					currency: 'RUB',
+					usd_price: response.data.rates.RUB,
 				},
-			})
-
-			return response.data.map(coin => ({
-				id: coin.id,
-				symbol: coin.symbol,
-				name: coin.name,
-				image: coin.image,
-				current_price: coin.current_price,
-				market_cap: coin.market_cap,
-				market_cap_rank: coin.market_cap_rank,
-				low_24h: coin.low_24h,
-				high_24h: coin.high_24h,
-				price_change_24h: coin.price_change_24h,
-				price_change_percentage_24h: coin.price_change_percentage_24h,
-				market_cap_change_24h: coin.market_cap_change_24h,
-				market_cap_change_percentage_24h: coin.market_cap_change_percentage_24h,
-				last_updated: coin.last_updated,
-			}))
+				{
+					currency: 'EUR',
+					usd_price: response.data.rates.EUR,
+				},
+			]
 		} catch (error) {
-			console.error('❌ Ошибка при запросе топ-100 криптовалют:', error.message)
-			throw new Error('Не удалось получить данные 100 криптовалют')
+			console.error('Ошибка при запросе фиатных валют:', error.message)
+			throw new Error('Не удалось получить список фиатных валют')
 		}
 	}
 
@@ -89,21 +62,55 @@ class cryptoApiServiceClass {
 			const response = await this.coinGeckoClient.get('simple/price', {
 				params: {
 					vs_currencies: 'usd',
-					symbols: 'eth,btc,sol',
+					ids: 'bitcoin,ethereum,solana',
 					precision: 8,
 				},
 			})
 
+			return {
+				BTC: response.data.bitcoin.usd,
+				SOL: response.data.solana.usd,
+				ETH: response.data.ethereum.usd,
+			}
+		} catch (error) {
+			console.error('Ошибка при запросе криптовалют:', error.message)
+			throw new Error('Не удалось получить данные криптовалют')
+		}
+	}
+
+	async getTop100Currencies() {
+		try {
+			const response = await this.coinGeckoClient.get('coins/markets', {
+				params: {
+					vs_currency: 'usd',
+					page: 1,
+					per_page: 100,
+					precision: 8,
+					price_change_percentage: '1h,24h,7d,14d',
+				},
+			})
+
 			return response.data.map(coin => ({
-				btc_usd: coin['btc']['usd'],
-				eth_usd: coin['eth']['usd'],
-				sol_usd: coin['sol']['usd'],
+				id: coin.id,
+				symbol: coin.symbol,
+				image: coin.image,
+				market_cap_rank: coin.market_cap_rank,
+				current_price: coin.current_price,
+				market_cap: coin.market_cap,
+				market_cap_change_24h: coin.market_cap_change_24h,
+				price_change_percentage_24h: coin.price_change_percentage_24h,
+				price_change_percentage_1h_in_currency:
+					coin.price_change_percentage_1h_in_currency,
+				price_change_percentage_24h_in_currency:
+					coin.price_change_percentage_24h_in_currency,
+				price_change_percentage_7d_in_currency:
+					coin.price_change_percentage_7d_in_currency,
 			}))
 		} catch (error) {
-			console.error('❌ Ошибка при запросе криптовалют:', error.message)
-			throw new Error('Не удалось получить данные криптовалют')
+			console.error('Ошибка при запросе топ-100 криптовалют:', error.message)
+			throw new Error('Не удалось получить данные 100 криптовалют')
 		}
 	}
 }
 
-export const cryptoApiService = new cryptoApiServiceClass()
+export default cryptoApiService = new cryptoApiService()

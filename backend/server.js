@@ -1,6 +1,7 @@
 import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
+import router from './routes/index.js'
 import { cryptoApiService } from './service/cryptoApiService.js'
 dotenv.config()
 
@@ -49,6 +50,8 @@ app.get('/api/crypto', async (req, res) => {
 		})
 	}
 })
+
+app.use('/', router)
 
 app.listen(PORT, () => {
 	console.log(`["INFO"]: Server is running on port ${PORT}`)
