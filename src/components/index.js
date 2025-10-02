@@ -24,3 +24,5 @@ export {
 	TableHeader,
 	TableRow,
 } from './ShadTable/ShadTable.jsx'
+export { TableData } from './TableData/TableData.jsx'
+export { Top100Table } from './Top100Table/Top100Table.jsx'

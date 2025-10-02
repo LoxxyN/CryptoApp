@@ -35,7 +35,7 @@ const Converter = () => {
 				<div>
 					<ConverterInput
 						dir='From'
-						amount={fromAmount}
+						amount={`${fromAmount}$`}
 						onAmountChange={setFromAmount}
 						itemsFiat={FIAT_CURRENCY}
 						itemsCrypto={CRYPTO_CURRENCY}
@@ -49,7 +49,7 @@ const Converter = () => {
 
 					<ConverterInput
 						dir='To'
-						amount={amount}
+						amount={`${amount}$`}
 						currency={toCurrency}
 						onCurrencyChange={setToCurrency}
 						itemsFiat={FIAT_CURRENCY}
