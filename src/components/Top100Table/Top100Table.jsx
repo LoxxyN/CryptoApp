@@ -1,13 +1,13 @@
 import {
 	Table,
 	TableBody,
-	TableCell,
+	TableData,
 	TableHead,
 	TableHeader,
 	TableRow,
-} from ".."
-import { TABLE_HEADING } from "./tableInfo.data"
-export const Top100Table = coinsData => {
+} from '..'
+import { TABLE_HEADING } from './tableHeading.data'
+export const Top100Table = ({ COINS_DATA }) => {
 	return (
 		<Table>
 			<TableHeader>
@@ -18,13 +18,7 @@ export const Top100Table = coinsData => {
 				</TableRow>
 			</TableHeader>
 			<TableBody>
-				<TableRow>
-					<TableCell></TableCell>
-					<TableCell></TableCell>
-					<TableCell></TableCell>
-					<TableCell></TableCell>
-					<TableCell></TableCell>
-				</TableRow>
+				<TableData COINS_DATA={COINS_DATA} />
 			</TableBody>
 		</Table>
 	)

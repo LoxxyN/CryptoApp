@@ -1,7 +1,9 @@
+import { TopTableContainer } from '@/layouts'
+
 const Top100Page = () => {
 	return (
 		<div>
-			<p>top100PAGE</p>
+			<TopTableContainer />
 		</div>
 	)
 }
