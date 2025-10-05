@@ -1,6 +1,3 @@
 export const ENV = {
-	COINGECKO_API_KEY: import.meta.env.VITE_COINGECKO_API_KEY,
-	FXRATES_API_KEY: import.meta.env.VITE_FXRATES_API_KEY,
-	BASE_CRYPTO_URL: import.meta.env.VITE_BASE_CRYPTO_URL,
-	BASE_FIAT_URL: import.meta.env.VITE_BASE_FIAT_URL
+	BASE_BACKEND_URL: import.meta.env.VITE_BASE_BACKEND_URL,
 }

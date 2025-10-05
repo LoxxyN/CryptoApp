@@ -34,7 +34,7 @@ class cryptoApiService {
 
 	async getFiatCurrencies() {
 		try {
-			const response = await this.fxratesClient.get('latest?', {
+			const response = await this.fxratesClient.get('latest', {
 				params: {
 					base: 'usd',
 					currencies: 'rub,eur',
@@ -42,16 +42,10 @@ class cryptoApiService {
 				},
 			})
 
-			return [
-				{
-					currency: 'RUB',
-					usd_price: response.data.rates.RUB,
-				},
-				{
-					currency: 'EUR',
-					usd_price: response.data.rates.EUR,
-				},
-			]
+			return {
+				RUB: response.data.rates.RUB,
+				EUR: response.data.rates.EUR,
+			}
 		} catch (error) {
 			console.error('Ошибка при запросе фиатных валют:', error.message)
 			throw new Error('Не удалось получить список фиатных валют')
@@ -87,7 +81,7 @@ class cryptoApiService {
 					page: 1,
 					per_page: 100,
 					precision: 8,
-					price_change_percentage: '1h,24h,7d,14d',
+					price_change_percentage: '1h,24h,7d',
 				},
 			})
 

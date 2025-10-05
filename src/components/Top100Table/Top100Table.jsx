@@ -1,12 +1,13 @@
 import {
+	CryptoList,
 	Table,
 	TableBody,
-	TableData,
 	TableHead,
 	TableHeader,
 	TableRow,
 } from '..'
 import { TABLE_HEADING } from './tableHeading.data'
+
 export const Top100Table = ({ COINS_DATA }) => {
 	return (
 		<Table>
@@ -18,7 +19,7 @@ export const Top100Table = ({ COINS_DATA }) => {
 				</TableRow>
 			</TableHeader>
 			<TableBody>
-				<TableData COINS_DATA={COINS_DATA} />
+				<CryptoList COINS_DATA={COINS_DATA} />
 			</TableBody>
 		</Table>
 	)

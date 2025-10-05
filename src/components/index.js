@@ -1,6 +1,7 @@
 export { Button } from './Button/Button.jsx'
 export { SwapConvertButton } from './Button/SwapConvertButton.jsx'
 export { ConverterInput } from './Converter/ConverterInput.jsx'
+export { CryptoList } from './CryptoList/CryptoList.jsx'
 export { CurrencyIcon } from './CurrencyIcon/CurrencyIcon.jsx'
 export { FooterLinks } from './FooterLinks/FooterLinks.jsx'
 export { FooterSocials } from './FooterSocials/FooterSocials.jsx'
@@ -23,5 +24,4 @@ export {
 	TableHeader,
 	TableRow,
 } from './ShadTable/ShadTable.jsx'
-export { TableData } from './TableData/TableData.jsx'
 export { Top100Table } from './Top100Table/Top100Table.jsx'

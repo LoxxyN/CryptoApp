@@ -4,7 +4,7 @@ export const useConverterStore = create(set => ({
 	fromAmount: 1,
 	fromCurrency: 'USD',
 	toCurrency: 'BTC',
-	setFromAmount: setFromAmount => set({ setFromAmount }),
-	setFromCurrency: setFromCurrency => set({ setFromCurrency }),
-	setToCurrency: setToCurrency => set({ setToCurrency }),
+	setFromAmount: fromAmount => set({ fromAmount }),
+	setFromCurrency: fromCurrency => set({ fromCurrency }),
+	setToCurrency: toCurrency => set({ toCurrency }),
 }))

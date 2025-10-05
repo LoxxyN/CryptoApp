@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { TableCell, TableRow } from '..'
-export const TableData = ({ COINS_DATA }) => {
+export const CryptoList = ({ COINS_DATA }) => {
 	return (
 		<>
 			{COINS_DATA.map(item => (

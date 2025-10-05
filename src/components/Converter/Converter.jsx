@@ -1,13 +1,8 @@
 import { ConverterInput, Loader, SwapConvertButton } from '@/components'
-import {
-	CONVERTER_URL,
-	CRYPTO_API_KEY,
-	FIAT_ARRAY,
-	OPTIONS,
-} from '@constants/constants'
+import { CONVERTER_URL, FIAT_ARRAY } from '@constants/constants'
 import { useFetch } from '@hooks/useFetch'
 import { useConverterStore } from '@store/index'
-import { getCryptoData, getToAmount, isFiatCurrency } from '@utils/index'
+import { getConverterData, getToAmount, isFiatCurrency } from '@utils/index'
 import { useMemo } from 'react'
 import { CRYPTO_CURRENCY } from './CryptoCurrency.data'
 import { FIAT_CURRENCY } from './FiatCurrency.data'
@@ -21,15 +16,15 @@ const Converter = () => {
 		setFromCurrency,
 		setToCurrency,
 	} = useConverterStore()
-	const { data, isLoading } = useFetch(CONVERTER_URL, OPTIONS(CRYPTO_API_KEY))
-	const rates = useMemo(() => (data ? getCryptoData(data) : null), [data])
+
+	const { data, isLoading } = useFetch(CONVERTER_URL)
+	const rates = useMemo(() => (data ? getConverterData(data) : null), [data])
 	const toAmount = useMemo(
 		() => getToAmount({ rates, fromAmount, fromCurrency, toCurrency }),
 		[rates, fromAmount, fromCurrency, toCurrency]
 	)
 
 	const amount = isFiatCurrency(FIAT_ARRAY, toCurrency, toAmount)
-
 	const onSwapValue = () => {
 		setFromCurrency(toCurrency)
 		setToCurrency(fromCurrency)
