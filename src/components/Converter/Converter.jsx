@@ -6,15 +6,21 @@ import {
 	OPTIONS,
 } from '@constants/constants'
 import { useFetch } from '@hooks/useFetch'
+import { useConverterStore } from '@store/index'
 import { getCryptoData, getToAmount, isFiatCurrency } from '@utils/index'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { CRYPTO_CURRENCY } from './CryptoCurrency.data'
 import { FIAT_CURRENCY } from './FiatCurrency.data'
 
 const Converter = () => {
-	const [fromAmount, setFromAmount] = useState(1)
-	const [fromCurrency, setFromCurrency] = useState('USD')
-	const [toCurrency, setToCurrency] = useState('BTC')
+	const {
+		fromAmount,
+		fromCurrency,
+		toCurrency,
+		setFromAmount,
+		setFromCurrency,
+		setToCurrency,
+	} = useConverterStore()
 	const { data, isLoading } = useFetch(CONVERTER_URL, OPTIONS(CRYPTO_API_KEY))
 	const rates = useMemo(() => (data ? getCryptoData(data) : null), [data])
 	const toAmount = useMemo(

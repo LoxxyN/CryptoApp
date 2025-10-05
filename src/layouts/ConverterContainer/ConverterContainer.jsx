@@ -1,6 +1,6 @@
 import { Loader } from '@/components'
 import { Info, Share2, SlidersHorizontal } from 'lucide-react'
-import { lazy, Suspense } from "react";
+import { lazy, Suspense } from 'react'
 const Converter = lazy(() => import('/src/components/Converter/Converter.jsx'))
 
 export const ConverterContainer = () => {

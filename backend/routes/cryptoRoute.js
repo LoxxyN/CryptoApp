@@ -1,8 +1,8 @@
-import express from "express"
-import cryptoApiService from "../service/cryptoApiService.js"
+import express from 'express'
+import cryptoApiService from '../service/cryptoApiService.js'
 const router = express.Router()
 
-const cryptoRoute = router.get("/crypto", async (req, res) => {
+const cryptoRoute = router.get('/crypto', async (req, res) => {
 	try {
 		const data = await cryptoApiService.getCryptoCurrencies()
 

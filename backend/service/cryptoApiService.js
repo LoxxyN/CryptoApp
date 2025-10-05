@@ -1,14 +1,14 @@
-import axios from "axios"
-import dotenv from "dotenv"
+import axios from 'axios'
+import dotenv from 'dotenv'
 dotenv.config()
 
 class cryptoApiService {
 	constructor() {
 		this.coinGeckoBaseURL =
-			process.env.BASE_CRYPTO_URL || "https://api.coingecko.com/api/v3/"
+			process.env.BASE_CRYPTO_URL || 'https://api.coingecko.com/api/v3/'
 
 		this.fxratesBaseURL =
-			process.env.BASE_FIAT_URL || "https://api.fxratesapi.com/"
+			process.env.BASE_FIAT_URL || 'https://api.fxratesapi.com/'
 
 		this.cryptoApiKey = process.env.COINGECKO_API_KEY
 		this.fiatApiKey = process.env.FXRATES_API_KEY
@@ -17,8 +17,8 @@ class cryptoApiService {
 			baseURL: this.coinGeckoBaseURL,
 			timeout: 10000,
 			headers: {
-				Authorization: this.cryptoApiKey ? `Bearer ${this.cryptoApiKey}` : "",
-				"Content-Type": "application/json",
+				Authorization: this.cryptoApiKey ? `Bearer ${this.cryptoApiKey}` : '',
+				'Content-Type': 'application/json',
 			},
 		})
 
@@ -26,44 +26,44 @@ class cryptoApiService {
 			baseURL: this.fxratesBaseURL,
 			timeout: 10000,
 			headers: {
-				Authorization: this.fiatApiKey ? `Bearer ${this.fiatApiKey}` : "",
-				"Content-Type": "application/json",
+				Authorization: this.fiatApiKey ? `Bearer ${this.fiatApiKey}` : '',
+				'Content-Type': 'application/json',
 			},
 		})
 	}
 
 	async getFiatCurrencies() {
 		try {
-			const response = await this.fxratesClient.get("latest?", {
+			const response = await this.fxratesClient.get('latest?', {
 				params: {
-					base: "usd",
-					currencies: "rub,eur",
+					base: 'usd',
+					currencies: 'rub,eur',
 					places: 3,
 				},
 			})
 
 			return [
 				{
-					currency: "RUB",
+					currency: 'RUB',
 					usd_price: response.data.rates.RUB,
 				},
 				{
-					currency: "EUR",
+					currency: 'EUR',
 					usd_price: response.data.rates.EUR,
 				},
 			]
 		} catch (error) {
-			console.error("Ошибка при запросе фиатных валют:", error.message)
-			throw new Error("Не удалось получить список фиатных валют")
+			console.error('Ошибка при запросе фиатных валют:', error.message)
+			throw new Error('Не удалось получить список фиатных валют')
 		}
 	}
 
 	async getCryptoCurrencies() {
 		try {
-			const response = await this.coinGeckoClient.get("simple/price", {
+			const response = await this.coinGeckoClient.get('simple/price', {
 				params: {
-					vs_currencies: "usd",
-					ids: "bitcoin,ethereum,solana",
+					vs_currencies: 'usd',
+					ids: 'bitcoin,ethereum,solana',
 					precision: 8,
 				},
 			})
@@ -74,20 +74,20 @@ class cryptoApiService {
 				ETH: response.data.ethereum.usd,
 			}
 		} catch (error) {
-			console.error("Ошибка при запросе криптовалют:", error.message)
-			throw new Error("Не удалось получить данные криптовалют")
+			console.error('Ошибка при запросе криптовалют:', error.message)
+			throw new Error('Не удалось получить данные криптовалют')
 		}
 	}
 
 	async getTop100Currencies() {
 		try {
-			const response = await this.coinGeckoClient.get("coins/markets", {
+			const response = await this.coinGeckoClient.get('coins/markets', {
 				params: {
-					vs_currency: "usd",
+					vs_currency: 'usd',
 					page: 1,
 					per_page: 100,
 					precision: 8,
-					price_change_percentage: "1h,24h,7d,14d",
+					price_change_percentage: '1h,24h,7d,14d',
 				},
 			})
 
@@ -108,8 +108,8 @@ class cryptoApiService {
 					coin.price_change_percentage_7d_in_currency,
 			}))
 		} catch (error) {
-			console.error("Ошибка при запросе топ-100 криптовалют:", error.message)
-			throw new Error("Не удалось получить данные 100 криптовалют")
+			console.error('Ошибка при запросе топ-100 криптовалют:', error.message)
+			throw new Error('Не удалось получить данные 100 криптовалют')
 		}
 	}
 }

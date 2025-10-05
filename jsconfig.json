@@ -7,9 +7,10 @@
 			"@hooks/*": ["hooks/*"],
 			"@utils/*": ["utils/*"],
 			"@config/*": ["config/*"],
-			"@pages/*": ["pages/*"]
+			"@pages/*": ["pages/*"],
+			"@store/*": ["store/*"]
 		}
 	},
-	"include": ["src", "hooks", "utils", "constants", "config", "pages"],
+	"include": ["src", "hooks", "utils", "constants", "config", "pages", "store"],
 	"exclude": ["node_modules"]
 }

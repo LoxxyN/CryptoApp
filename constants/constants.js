@@ -1,14 +1,14 @@
-import { ENV } from "@config/env"
+import { ENV } from '@config/env'
 
 export const OPTIONS = API_KEY => {
 	return {
-		method: "GET",
-		"Content-Type": "application/json",
+		method: 'GET',
+		'Content-Type': 'application/json',
 		Authorization: `Bearer ${API_KEY}`,
 	}
 }
 
-export const FIAT_ARRAY = ["RUB", "EUR", "USD"]
+export const FIAT_ARRAY = ['RUB', 'EUR', 'USD']
 export const CRYPTO_API_KEY = ENV.COINGECKO_API_KEY
 export const FIAT_API_KEY = ENV.FXRATES_API_KEY
 

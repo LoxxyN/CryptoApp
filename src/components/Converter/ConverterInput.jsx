@@ -1,5 +1,5 @@
-import { NumberInput } from "@/components/index.js"
-import { CurrencySelect } from "../CurrencySelect/CurrencySelect"
+import { NumberInput } from '@/components/index.js'
+import { CurrencySelect } from '../CurrencySelect/CurrencySelect'
 
 export const ConverterInput = ({
 	amount,
@@ -14,7 +14,7 @@ export const ConverterInput = ({
 	return (
 		<div className='input-container flex bg-neutral-900 h-16 rounded-2xl w-72 justify-between z-[100]'>
 			<NumberInput
-				value={amount === "" ? 0 : amount}
+				value={amount === '' ? 0 : amount}
 				onChange={onAmountChange}
 				id={`convert${dir}`}
 				placeholder={dir}
