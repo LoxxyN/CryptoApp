@@ -1,5 +1,4 @@
-import { NumberInput } from '@/components/index.js'
-import { CurrencySelect } from '../CurrencySelect/CurrencySelect'
+import { CurrencySelect, NumberInput } from '@/components/index'
 
 export const ConverterInput = ({
 	amount,

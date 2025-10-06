@@ -2,7 +2,12 @@ import { ConverterInput, Loader, SwapConvertButton } from '@/components'
 import { CONVERTER_URL, FIAT_ARRAY } from '@constants/constants'
 import { useFetch } from '@hooks/useFetch'
 import { useConverterStore } from '@store/index'
-import { getConverterData, getToAmount, isFiatCurrency } from '@utils/index'
+import {
+	currencySymbol,
+	getConverterData,
+	getToAmount,
+	isFiatCurrency,
+} from '@utils/index'
 import { useMemo } from 'react'
 import { CRYPTO_CURRENCY } from './CryptoCurrency.data'
 import { FIAT_CURRENCY } from './FiatCurrency.data'
@@ -38,7 +43,7 @@ const Converter = () => {
 				<div>
 					<ConverterInput
 						dir='From'
-						amount={`${fromAmount}$`}
+						amount={currencySymbol(fromAmount, fromCurrency)}
 						onAmountChange={setFromAmount}
 						itemsFiat={FIAT_CURRENCY}
 						itemsCrypto={CRYPTO_CURRENCY}
@@ -52,7 +57,7 @@ const Converter = () => {
 
 					<ConverterInput
 						dir='To'
-						amount={`${amount}$`}
+						amount={currencySymbol(amount, toCurrency)}
 						currency={toCurrency}
 						onCurrencyChange={setToCurrency}
 						itemsFiat={FIAT_CURRENCY}
