@@ -1,4 +1,5 @@
 export { convertCurrencies } from './convertCurrencies'
+export { currencySymbol } from './currencySymbol'
 export { getConverterData } from './getConverterData'
 export { getToAmount } from './getToAmount'
 export { isFiatCurrency } from './isFiatCurrency'

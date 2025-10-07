@@ -4,7 +4,7 @@ import {
 	SelectSeparator,
 	SelectTrigger,
 	SelectValue,
-} from '@/components/ShadSelect/ShadSelect'
+} from '@/components/index'
 import { CurrencySelectItem } from './CurrencySelectItem'
 
 export const CurrencySelect = ({

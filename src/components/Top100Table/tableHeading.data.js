@@ -1,30 +1,30 @@
 export const TABLE_HEADING = [
 	{
 		id: 1,
-		description: "#",
+		description: '#',
 	},
 	{
 		id: 2,
-		description: "Coin",
+		description: 'Coin',
 	},
 	{
 		id: 3,
-		description: "Price",
+		description: 'Price',
 	},
 	{
 		id: 4,
-		description: "1h",
+		description: '1h',
 	},
 	{
 		id: 5,
-		description: "24h",
+		description: '24h',
 	},
 	{
 		id: 6,
-		description: "7d",
+		description: '7d',
 	},
 	{
 		id: 7,
-		description: "Market Cap",
+		description: 'Market Cap',
 	},
 ]

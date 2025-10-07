@@ -1,6 +1,14 @@
+export {
+	Select,
+	SelectContent,
+	SelectSeparator,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ShadSelect/ShadSelect'
 export { Button } from './Button/Button.jsx'
 export { SwapConvertButton } from './Button/SwapConvertButton.jsx'
 export { ConverterInput } from './Converter/ConverterInput.jsx'
+export { CryptoList } from './CryptoList/CryptoList.jsx'
 export { CurrencyIcon } from './CurrencyIcon/CurrencyIcon.jsx'
 export { CurrencySelect } from './CurrencySelect/CurrencySelect.jsx'
 export { FooterLinks } from './FooterLinks/FooterLinks.jsx'
@@ -14,7 +22,6 @@ export {
 	NavigationMenuItem,
 	NavigationMenuLink,
 } from './ShadNavMenu/ShadNavMenu.jsx'
-export { Select } from './ShadSelect/ShadSelect.jsx'
 export {
 	Table,
 	TableBody,
@@ -24,5 +31,4 @@ export {
 	TableHeader,
 	TableRow,
 } from './ShadTable/ShadTable.jsx'
-export { TableData } from './TableData/TableData.jsx'
 export { Top100Table } from './Top100Table/Top100Table.jsx'

@@ -1,8 +1,10 @@
 import { create } from 'zustand'
 
 export const useConverterStore = create(set => ({
+	fromAmount: 1,
 	fromCurrency: 'USD',
-	setFromCurrency: fromCurrency => set({ fromCurrency }),
 	toCurrency: 'BTC',
+	setFromAmount: fromAmount => set({ fromAmount }),
+	setFromCurrency: fromCurrency => set({ fromCurrency }),
 	setToCurrency: toCurrency => set({ toCurrency }),
 }))

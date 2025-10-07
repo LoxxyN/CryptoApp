@@ -34,16 +34,16 @@ class cryptoApiService {
 
 	async getFiatCurrencies() {
 		try {
-			const response = await this.fxratesClient.get('latest?', {
+			const response = await this.fxratesClient.get('latest', {
 				params: {
 					base: 'usd',
 					currencies: 'rub,eur',
 					places: 3,
 				},
 			})
+
 			return {
 				RUB: response.data.rates.RUB,
-				USD: 1.0,
 				EUR: response.data.rates.EUR,
 			}
 		} catch (error) {
@@ -81,7 +81,7 @@ class cryptoApiService {
 					page: 1,
 					per_page: 100,
 					precision: 8,
-					price_change_percentage: '1h,24h,7d,14d',
+					price_change_percentage: '1h,24h,7d',
 				},
 			})
 

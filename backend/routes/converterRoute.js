@@ -4,14 +4,12 @@ const router = express.Router()
 
 const converterRoute = router.get('/converter', async (req, res) => {
 	try {
-		const cryptoData = await cryptoApiService.getCryptoCurrencies()
 		const fiatData = await cryptoApiService.getFiatCurrencies()
-
+		const cryptoData = await cryptoApiService.getCryptoCurrencies()
 		res.json({
-			success: true,
 			data: {
-				crypto: { ...cryptoData },
 				fiat: { ...fiatData },
+				crypto: { ...cryptoData },
 			},
 		})
 	} catch (error) {
