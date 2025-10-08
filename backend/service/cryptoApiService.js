@@ -37,12 +37,13 @@ class cryptoApiService {
 			const response = await this.fxratesClient.get('latest', {
 				params: {
 					base: 'usd',
-					currencies: 'rub,eur',
+					currencies: 'rub,eur,usd',
 					places: 3,
 				},
 			})
 
 			return {
+				USD: response.data.rates.USD,
 				RUB: response.data.rates.RUB,
 				EUR: response.data.rates.EUR,
 			}

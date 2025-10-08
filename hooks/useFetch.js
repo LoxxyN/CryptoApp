@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export const useFetch = (url, options) => {
+export const useFetch = url => {
 	const [data, setData] = useState(null)
 	const [error, setError] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
@@ -11,7 +11,7 @@ export const useFetch = (url, options) => {
 
 		const fetchData = async () => {
 			try {
-				const response = await fetch(url, { ...options, signal })
+				const response = await fetch(url, { signal })
 				if (!response.ok) {
 					throw new Error(`HTTP Error! status: ${response.status}`)
 				}
