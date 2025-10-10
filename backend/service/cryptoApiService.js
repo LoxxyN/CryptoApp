@@ -1,5 +1,6 @@
 import axios from 'axios'
 import dotenv from 'dotenv'
+import { createError, ERROR_TYPES } from '../utils/index.js'
 dotenv.config()
 
 class cryptoApiService {
@@ -30,83 +31,118 @@ class cryptoApiService {
 				'Content-Type': 'application/json',
 			},
 		})
+
+		this.setupInterceptors()
+	}
+
+	setupInterceptors() {
+		const handleApiError = (error, serviceName) => {
+			if (error.response) {
+				if (error.response.status === 429) {
+					const retryAfter = error.response?.headers['retryAfter']
+					throw createError(
+						ERROR_TYPES.RATE_LIMIT,
+						`${serviceName} API rate limit exceeded`,
+						retryAfter,
+						{ serviceName: serviceName }
+					)
+				}
+
+				throw createError(
+					ERROR_TYPES.SERVER,
+					`${serviceName} API ERROR: ${error.response.status}`,
+					null,
+					{
+						serviceName: serviceName,
+						status: error.response.status,
+						data: error.response.data,
+					}
+				)
+			} else if (error.request) {
+				throw createError(
+					ERROR_TYPES.SERVER,
+					`Network error contacting ${serviceName} API`,
+					null,
+					{ serviceName: serviceName }
+				)
+			} else {
+				throw createError(ERROR_TYPES.SERVER, error.message, null, {
+					serviceName: serviceName,
+				})
+			}
+		}
+
+		this.coinGeckoClient.interceptors.response.use(
+			response => response,
+			error => handleApiError(error, 'CoinGecko')
+		)
+
+		this.fxratesClient.interceptors.response.use(
+			response => response,
+			error => handleApiError(error, 'FXRates')
+		)
 	}
 
 	async getFiatCurrencies() {
-		try {
-			const response = await this.fxratesClient.get('latest', {
-				params: {
-					base: 'usd',
-					currencies: 'rub,eur,usd',
-					places: 3,
-				},
-			})
+		const response = await this.fxratesClient.get('latest', {
+			params: {
+				base: 'usd',
+				currencies: 'rub,eur,usd',
+				places: 3,
+			},
+		})
 
-			return {
-				USD: response.data.rates.USD,
-				RUB: response.data.rates.RUB,
-				EUR: response.data.rates.EUR,
-			}
-		} catch (error) {
-			console.error('Ошибка при запросе фиатных валют:', error.message)
-			throw new Error('Не удалось получить список фиатных валют')
+		return {
+			USD: response.data.rates.USD,
+			RUB: response.data.rates.RUB,
+			EUR: response.data.rates.EUR,
 		}
 	}
 
 	async getCryptoCurrencies() {
-		try {
-			const response = await this.coinGeckoClient.get('simple/price', {
-				params: {
-					vs_currencies: 'usd',
-					ids: 'bitcoin,ethereum,solana',
-					precision: 8,
-				},
-			})
+		const response = await this.coinGeckoClient.get('simple/price', {
+			params: {
+				vs_currencies: 'usd',
+				ids: 'bitcoin,ethereum,solana',
+				precision: 8,
+			},
+		})
 
-			return {
-				BTC: response.data.bitcoin.usd,
-				SOL: response.data.solana.usd,
-				ETH: response.data.ethereum.usd,
-			}
-		} catch (error) {
-			console.error('Ошибка при запросе криптовалют:', error.message)
-			throw new Error('Не удалось получить данные криптовалют')
+		return {
+			BTC: response.data.bitcoin.usd,
+			SOL: response.data.solana.usd,
+			ETH: response.data.ethereum.usd,
 		}
 	}
 
 	async getTop100Currencies() {
-		try {
-			const response = await this.coinGeckoClient.get('coins/markets', {
-				params: {
-					vs_currency: 'usd',
-					page: 1,
-					per_page: 100,
-					precision: 8,
-					price_change_percentage: '1h,24h,7d',
-				},
-			})
+		const response = await this.coinGeckoClient.get('coins/markets', {
+			params: {
+				vs_currency: 'usd',
+				page: 1,
+				per_page: 100,
+				precision: 8,
+				price_change_percentage: '1h,24h,7d',
+			},
+		})
 
-			return response.data.map(coin => ({
-				name: coin.name,
-				symbol: coin.symbol,
-				image: coin.image,
-				market_cap_rank: coin.market_cap_rank,
-				current_price: coin.current_price,
-				market_cap: coin.market_cap,
-				market_cap_change_24h: coin.market_cap_change_24h,
-				price_change_percentage_24h: coin.price_change_percentage_24h,
-				price_change_percentage_1h_in_currency:
-					coin.price_change_percentage_1h_in_currency,
-				price_change_percentage_24h_in_currency:
-					coin.price_change_percentage_24h_in_currency,
-				price_change_percentage_7d_in_currency:
-					coin.price_change_percentage_7d_in_currency,
-			}))
-		} catch (error) {
-			console.error('Ошибка при запросе топ-100 криптовалют:', error.message)
-			throw new Error('Не удалось получить данные 100 криптовалют')
-		}
+		return response.data.map(coin => ({
+			name: coin.name,
+			symbol: coin.symbol,
+			image: coin.image,
+			market_cap_rank: coin.market_cap_rank,
+			current_price: coin.current_price,
+			market_cap: coin.market_cap,
+			market_cap_change_24h: coin.market_cap_change_24h,
+			price_change_percentage_24h: coin.price_change_percentage_24h,
+			price_change_percentage_1h_in_currency:
+				coin.price_change_percentage_1h_in_currency,
+			price_change_percentage_24h_in_currency:
+				coin.price_change_percentage_24h_in_currency,
+			price_change_percentage_7d_in_currency:
+				coin.price_change_percentage_7d_in_currency,
+		}))
 	}
 }
 
-export default cryptoApiService = new cryptoApiService()
+export default new cryptoApiService()

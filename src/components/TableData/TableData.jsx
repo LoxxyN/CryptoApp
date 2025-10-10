@@ -1,5 +1,6 @@
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { TableCell, TableRow } from '..'
+
 export const TableData = ({ COINS_DATA }) => {
 	return (
 		<>
